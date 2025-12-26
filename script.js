@@ -1,4 +1,3 @@
-//your JS code here. If required.
 const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
     const checkbox = document.getElementById("checkbox");
@@ -13,7 +12,6 @@ const usernameInput = document.getElementById("username");
       existingBtn.style.display = "inline-block";
     }
 
-    // Submit button logic
     submitBtn.onclick = function (e) {
       e.preventDefault();
 
@@ -33,7 +31,6 @@ const usernameInput = document.getElementById("username");
       }
     };
 
-    // Existing user login
     existingBtn.onclick = function () {
       const savedUser = localStorage.getItem("username");
       alert(`Logged in as ${savedUser}`);
