@@ -1,37 +1,53 @@
-const usernameInput = document.getElementById("username");
-    const passwordInput = document.getElementById("password");
-    const checkbox = document.getElementById("checkbox");
-    const submitBtn = document.getElementById("submit");
-    const existingBtn = document.getElementById("existing");
+function renderQuestions() {
+  questionsDiv.innerHTML = "";
 
-    // Check localStorage on page load
-    const savedUsername = localStorage.getItem("username");
-    const savedPassword = localStorage.getItem("password");
+  questions.forEach((q, qIndex) => {
+    const qDiv = document.createElement("div");
 
-    if (savedUsername && savedPassword) {
-      existingBtn.style.display = "inline-block";
-    }
+    const p = document.createElement("p");
+    p.textContent = q.question;
+    qDiv.appendChild(p);
 
-    submitBtn.onclick = function (e) {
-      e.preventDefault();
+    q.options.forEach((opt, optIndex) => {
+      const label = document.createElement("label");
+      const radio = document.createElement("input");
 
-      const username = usernameInput.value;
-      const password = passwordInput.value;
+      radio.type = "radio";
+      radio.name = `question-${qIndex}`;
+      radio.value = optIndex;
 
-      alert(`Logged in as ${username}`);
-
-      if (checkbox.checked) {
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
-        existingBtn.style.display = "inline-block";
-      } else {
-        localStorage.removeItem("username");
-        localStorage.removeItem("password");
-        existingBtn.style.display = "none";
+      // Restore checked state (ATTRIBUTE + PROPERTY)
+      if (savedProgress[qIndex] == optIndex) {
+        radio.checked = true;
+        radio.setAttribute("checked", "true");
       }
-    };
 
-    existingBtn.onclick = function () {
-      const savedUser = localStorage.getItem("username");
-      alert(`Logged in as ${savedUser}`);
-    };
+      radio.addEventListener("change", () => {
+        // Update progress
+        savedProgress[qIndex] = optIndex;
+
+        // 🔴 ALWAYS call setItem (Cypress spy requirement)
+        sessionStorage.setItem(
+          "progress",
+          JSON.stringify(savedProgress)
+        );
+
+        // Sync checked attribute for Cypress
+        document
+          .querySelectorAll(`input[name="question-${qIndex}"]`)
+          .forEach(r => r.removeAttribute("checked"));
+
+        radio.checked = true;
+        radio.setAttribute("checked", "true");
+      });
+
+      label.appendChild(radio);
+      label.appendChild(document.createTextNode(opt));
+
+      qDiv.appendChild(label);
+      qDiv.appendChild(document.createElement("br"));
+    });
+
+    questionsDiv.appendChild(qDiv);
+  });
+}
