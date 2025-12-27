@@ -1,29 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Remember Me: Login Form</title>
+</head>
+<body>
 
   <!-- Heading -->
   <h1>Login Form</h1>
 
   <!-- Login Form -->
-  <form id="form">
+  <form id="login-form">
+    <input
+      type="text"
+      id="username"
+      placeholder="Username"
+    />
+    <br /><br />
 
-    <!-- Username -->
-    <label for="username">Username</label>
-    <input type="text" id="username" placeholder="Username" />
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+    />
+    <br /><br />
 
-    <!-- Password -->
-    <label for="password">Password</label>
-    <input type="password" id="password" placeholder="Password" />
-
-    <!-- Remember Me -->
     <label>
-      <input type="checkbox" id="checkbox" />
+      <input
+        type="checkbox"
+        id="checkbox"
+      />
       Remember me.
     </label>
+    <br /><br />
 
-    <!-- Submit -->
-    <input type="submit" id="submit" value="Submit" />
+    <input
+      type="submit"
+      id="submit"
+      value="Submit"
+    />
   </form>
 
-  <!-- Existing user login button -->
+  <br />
+
+  <!-- Existing User Button -->
   <button id="existing" style="display: none;">
     Login as existing user
   </button>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,53 +1,41 @@
-function renderQuestions() {
-  questionsDiv.innerHTML = "";
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const checkbox = document.getElementById("checkbox");
+const form = document.getElementById("login-form");
+const existingBtn = document.getElementById("existing");
 
-  questions.forEach((q, qIndex) => {
-    const qDiv = document.createElement("div");
+/* ---------- INITIAL STATE ---------- */
+const savedUsername = localStorage.getItem("username");
+const savedPassword = localStorage.getItem("password");
 
-    const p = document.createElement("p");
-    p.textContent = q.question;
-    qDiv.appendChild(p);
-
-    q.options.forEach((opt, optIndex) => {
-      const label = document.createElement("label");
-      const radio = document.createElement("input");
-
-      radio.type = "radio";
-      radio.name = `question-${qIndex}`;
-      radio.value = optIndex;
-
-      // Restore checked state (ATTRIBUTE + PROPERTY)
-      if (savedProgress[qIndex] == optIndex) {
-        radio.checked = true;
-        radio.setAttribute("checked", "true");
-      }
-
-      radio.addEventListener("change", () => {
-        // Update progress
-        savedProgress[qIndex] = optIndex;
-
-        // 🔴 ALWAYS call setItem (Cypress spy requirement)
-        sessionStorage.setItem(
-          "progress",
-          JSON.stringify(savedProgress)
-        );
-
-        // Sync checked attribute for Cypress
-        document
-          .querySelectorAll(`input[name="question-${qIndex}"]`)
-          .forEach(r => r.removeAttribute("checked"));
-
-        radio.checked = true;
-        radio.setAttribute("checked", "true");
-      });
-
-      label.appendChild(radio);
-      label.appendChild(document.createTextNode(opt));
-
-      qDiv.appendChild(label);
-      qDiv.appendChild(document.createElement("br"));
-    });
-
-    questionsDiv.appendChild(qDiv);
-  });
+if (savedUsername && savedPassword) {
+  existingBtn.style.display = "inline-block";
+} else {
+  existingBtn.style.display = "none";
 }
+
+/* ---------- FORM SUBMISSION ---------- */
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const username = usernameInput.value;
+  const password = passwordInput.value;
+
+  alert(`Logged in as ${username}`);
+
+  if (checkbox.checked) {
+    localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
+    existingBtn.style.display = "inline-block";
+  } else {
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
+    existingBtn.style.display = "none";
+  }
+});
+
+/* ---------- EXISTING USER LOGIN ---------- */
+existingBtn.addEventListener("click", function () {
+  const storedUsername = localStorage.getItem("username");
+  alert(`Logged in as ${storedUsername}`);
+});
