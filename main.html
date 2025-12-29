@@ -1,50 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Remember Me: Login Form</title>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
 </head>
 <body>
 
-  <h1>Login Form</h1>
+    <!-- Heading -->
+    <h1>Login Form</h1>
 
-  <form id="login-form">
+    <!-- Login Form -->
+    <form id="form">
+        <input
+            type="text"
+            id="username"
+            placeholder="Username"
+        /><br><br>
 
-    <!-- Username -->
-    <label for="username">Username:</label>
-    <input
-      type="text"
-      id="username"
-      placeholder="Username"
-    />
-    <br /><br />
+        <input
+            type="password"
+            id="password"
+            placeholder="Password"
+        /><br><br>
 
-    <!-- Password -->
-    <label for="password">Password:</label>
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-    />
-    <br /><br />
+        <label>
+            <input type="checkbox" id="checkbox">
+            Remember me.
+        </label><br><br>
 
-    <!-- Remember Me -->
-    <label for="checkbox">Remember me.</label>
-    <input
-      type="checkbox"
-      id="checkbox"
-    />
-    <br /><br />
+        <input
+            type="submit"
+            id="submit"
+            value="Submit"
+        />
+    </form>
 
-    <!-- Submit -->
-    <input
-      type="submit"
-      id="submit"
-      value="Submit"
-    />
-  </form>
+    <br>
 
-  <br />
+    <!-- Existing User Button (hidden initially) -->
+    <button id="existing" style="display: none;">
+        Login as existing user
+    </button>
 
-  <!-- Existing User Button -->
-  <button id="existing" style="disp
+    <script src="script.js"></script>
+</body>
+</html>
