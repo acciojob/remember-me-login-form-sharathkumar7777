@@ -11,7 +11,9 @@
 
   <!-- Login Form -->
   <form id="login-form">
-    <!-- Username -->
+
+    <!-- Username Label + Input -->
+    <label for="username">Username</label><br />
     <input
       type="text"
       id="username"
@@ -20,7 +22,8 @@
     />
     <br /><br />
 
-    <!-- Password -->
+    <!-- Password Label + Input -->
+    <label for="password">Password</label><br />
     <input
       type="password"
       id="password"
@@ -30,7 +33,7 @@
     <br /><br />
 
     <!-- Remember Me Checkbox -->
-    <label>
+    <label for="checkbox">
       <input type="checkbox" id="checkbox" />
       Remember me.
     </label>
@@ -46,7 +49,7 @@
 
   <br />
 
-  <!-- Existing User Button (hidden initially) -->
+  <!-- Existing User Button -->
   <button id="existing" style="display: none;">
     Login as existing user
   </button>
@@ -68,7 +71,7 @@
       }
     });
 
-    // Form submission
+    // Form submit
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
